@@ -1,6 +1,7 @@
 import asyncio
 
 from fastapi import WebSocket
+from fastapi.websockets import WebSocketState
 
 from src.routes.base.websocket import WebsocketRouter
 from src.services.chat.service import ChatService
@@ -14,7 +15,7 @@ asyncio.run(DadosService.subscribe_to_watch_dados_rolados(
 
 @dados_route.new_websocket_route("/ws/dados/{player}")
 async def dados(websocket: WebSocket, player: str):
-    while True:
+    while websocket.client_state == WebSocketState.CONNECTED:
         received = await websocket.receive_json()
         try:
             modificador = int(received["modificador"] or 0)

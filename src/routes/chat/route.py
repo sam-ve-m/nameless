@@ -1,4 +1,5 @@
 from fastapi import WebSocket
+from fastapi.websockets import WebSocketState
 
 from src.domain.dto.chat.dto import MessageDto
 from src.routes.base.websocket import WebsocketRouter
@@ -11,7 +12,7 @@ chat_route = WebsocketRouter()
 async def chat(websocket: WebSocket, player: str):
     messages = await ChatService.get_history()
     await websocket.send_json(messages)
-    while True:
+    while websocket.client_state == WebSocketState.CONNECTED:
         received = await websocket.receive_text()
         message = MessageDto(player=player, message=str(received))
         await ChatService.save_message(message)
