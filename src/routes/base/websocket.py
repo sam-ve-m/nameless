@@ -32,12 +32,6 @@ class WebsocketRouter(APIRouter):
 
     async def get_active_websocket_subscriptions(self) -> dict:
         subscriptions = self.subscriptions
-        debbug = False
-        if debbug:
-            try:
-                await subscriptions["two"].send_json({})
-            except Exception as error:
-                a = error
         return subscriptions
 
     async def publish_json(self, message: Union[dict, list], websocket_to_ignore=None):
