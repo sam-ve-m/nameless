@@ -1,7 +1,7 @@
 import asyncio
 from typing import Dict
 
-from src.domain.dto.jogador.dto import JogadorDto, AtributoDoJogadorDto, PericiaDoJogadorDto
+from src.domain.dto.jogador.dto import JogadorDto, AtributoDoJogadorDto, PericiaDoJogadorDto, StatusDto
 from src.domain.enums.pericia.enum import PericiaModificador
 from src.domain.model.player.model import Jogador, AtributoDoJogador, PericiaDoJogador
 from src.repositories.jogador.repository import JogadorRepository
@@ -13,10 +13,12 @@ class JogadorService:
     @classmethod
     async def pegar_jogador(cls, nome: str) -> JogadorDto:
         jogador = await cls.repository.pegar_jogador(nome)
-        atributos, defesa, movimento = await asyncio.gather(
+        atributos, defesa, movimento, vida, esforco  = await asyncio.gather(
             cls._calcula_atributos(jogador),
             cls._calcula_defesa(jogador),
             cls._calcula_movimento(jogador),
+            cls._calcula_vida(jogador),
+            cls._calcula_esforco(jogador),
         )
         dto = JogadorDto(
             nome=jogador.nome,
@@ -26,6 +28,8 @@ class JogadorService:
             origem=jogador.origem,
             caminho_da_foto=jogador.caminho_da_foto,
             atributos=atributos,
+            vida=vida,
+            esforco=esforco,
         )
         return dto
 
@@ -73,3 +77,17 @@ class JogadorService:
             modificador=PericiaModificador[pericia.treinamento.name].value
         )
         return pericia_dto
+
+    @staticmethod
+    async def _calcula_vida(jogador: Jogador) -> StatusDto:
+        return StatusDto(
+            atual=jogador.vida.maximo,
+            maximo=jogador.vida.maximo,
+        )
+
+    @staticmethod
+    async def _calcula_esforco(jogador: Jogador) -> StatusDto:
+        return StatusDto(
+            atual=jogador.esforco.atual,
+            maximo=jogador.esforco.maximo,
+        )

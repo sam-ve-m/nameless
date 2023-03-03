@@ -15,6 +15,8 @@ player_route = APIRouter()
 
 @player_route.get("/player/{player}")
 def details(request: Request, player: str):
+    if player == "mestre":
+        return player_templates.TemplateResponse("mestre.html", {"request": request, "player": player})
     return player_templates.TemplateResponse("player.html", {"request": request, "player": player})
 
 

@@ -36,7 +36,7 @@
                 class="nav-link-accent">Nameless</a></div>
         <div class="headersection hsright w-clearfix">
             <div class="pearson"><img
-                    loading="lazy" height="30" alt="" class="perfil raio">
+                    loading="lazy" height="30" alt="" class="perfil">
                 <div class="name" id="player-name">{{player}}</div>
             </div><img
                 loading="lazy"
@@ -110,10 +110,28 @@
 </ul>
         <div class="map"></div>
         <div class="lateral direito">
-            <ul role="list" class="statuses">
-                <li class="status decima">Pontos de vida</li>
-                <li class="status">Pontos de mana</li>
-            </ul>
+            <div class="statuses">
+                <div class="status">
+                    <div class="statusbox">
+                        <div class="statusname player">Pv.</div>
+                        <div class="statusactive"></div>
+                        <div class="statustotal"></div>
+                    </div>
+                    <button class="statuschangesignal">+</button>
+                    <button class="statuschangesignal">-</button>
+                    <input class="statuschange" value="1" style="text-align: center;" id="valor_mudanca_vida">
+                </div>
+                <div class="status">
+                    <div class="statusbox pm">
+                        <div class="statusname player pm">Pm.</div>
+                        <div class="statusactive pm"></div>
+                        <div class="statustotal pm"></div>
+                    </div>
+                    <button class="statuschangesignal">+</button>
+                    <button class="statuschangesignal">-</button>
+                    <input class="statuschange" value="1" style="text-align: center;" id="valor_mudanca_esforco">
+                </div>
+            </div>
             <div id="visible-characters" class="div-block"></div>
             <div class="chat">
                 <ul id="message-chat" role="list" class="messages w-list-unstyled"></ul>
