@@ -44,11 +44,13 @@ function add_message(value, sender){
     const message_element = document.createElement("li");
     message_element.classList.add("message");
     message_element.classList.add(sender);
-    image.setAttribute("src", "https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png");
     image.setAttribute("loading", "lazy");
     image.setAttribute("height", "30");
     image.setAttribute("alt", "");
     image.classList.add("perfil");
+
+    set_image(sender, image);
+
     message_element.appendChild(image);
     message_element.appendChild(message_text_element);
 

@@ -14,6 +14,11 @@ class AtributoDoJogadorDto(TypedDict):
     pericias: List[PericiaDoJogadorDto]
 
 
+class StatusDto(TypedDict):
+    maximo: int
+    atual: int
+
+
 class JogadorDto(TypedDict):
     nome: str
     raca: str
@@ -22,3 +27,5 @@ class JogadorDto(TypedDict):
     movimento: int
     caminho_da_foto: str
     atributos: Dict[str, AtributoDoJogadorDto]
+    vida: StatusDto
+    esforco: StatusDto
