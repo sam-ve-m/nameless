@@ -30,9 +30,16 @@ class AtributoDoJogador(BaseModel):
         return pericias
 
 
+class Status(BaseModel):
+    maximo: int = 0
+    atual: int = 0
+
+
 class Jogador(BaseModel):
-    nome: str
-    raca: str
-    origem: str
-    caminho_da_foto: str
-    atributos: List[AtributoDoJogador]
+    nome: str = ""
+    raca: str = ""
+    origem: str = ""
+    caminho_da_foto: str = ""
+    atributos: List[AtributoDoJogador] = []
+    vida: Status = Status()
+    esforco: Status = Status()

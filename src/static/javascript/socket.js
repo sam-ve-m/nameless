@@ -1,4 +1,5 @@
 const resource_name = window.location.pathname.split("/")[2];
+connected_sockets = [];
 
 function connect_to_socket(url, on_message_function) {
   web_socket = new WebSocket(url);
@@ -8,8 +9,20 @@ function connect_to_socket(url, on_message_function) {
         new_websocket.onclose = this.onclose;
         return new_websocket;
   };
+  connected_sockets.push(web_socket);
   return web_socket
 }
+
+//window.addEventListener("beforeunload", function(e){disconnect_all()});
+
+function disconnect_all(){
+    console.log(1);
+    for (var i = 0; i < connected_sockets.length; i++){
+        socket = connected_sockets[i];
+        socket.close();
+        while (socket != socket.CLOSED) {};
+    };
+};
 
 //
 //var message_socket = connect_to_socket('ws://localhost:3334/ws/message/test', function(event) {

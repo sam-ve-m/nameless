@@ -1,6 +1,3 @@
-import asyncio
-from typing import List
-
 from src.domain.dto.chat.dto import MessageDto
 from src.domain.model.chat.model import Message
 from src.repositories.chat.repository import ChatRepository
