@@ -373,78 +373,22 @@
                 </div>
             </div>
         </div>
-        <div class="chat">
-            <ul id="message-chat" role="list" class="messages w-list-unstyled">
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil">
-                    <div class="messagetext">Hey</div>
-                </li>
-                <li class="message messageplayer"><img
-                        src="https://uploads-ssl.webflow.com/63ef94743451bd743ebebef4/63f24302222b9bae30daeac8_44196.png"
-                        loading="lazy" height="30" alt="" class="perfil fromplayer">
-                    <div class="messagetext fromplayer">HeyHeyHeyHeyHeyHey</div>
-                </li>
-            </ul>
-            <div class="input w-form">
-                <form id="email-form" name="email-form" data-name="Email Form" method="get" class="form"
-                    aria-label="Email Form"><input type="text" class="text-field w-input" maxlength="256" name="Message"
-                        data-name="Message" placeholder="" id="message-to-send" required=""><a href="#"
-                        class="submit-button w-button">Button Text</a></form>
-                <div class="success-message w-form-done" tabindex="-1" role="region" aria-label="Email Form success">
-                    <div class="text-block-2">Thank you! Your submission has been received!</div>
-                </div>
-                <div class="error-message w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
-                    <div>Oops! Something went wrong while submitting the form.</div>
+            <div class="chat">
+                <ul id="message-chat" role="list" class="messages w-list-unstyled"></ul>
+                <div class="input w-form">
+                    <div class="form">
+                        <input id="message-to-send" type="text" class="text-field w-input" maxlength="256">
+                        <button id="send-message" onclick="send_message()" class="submit-button w-button"></button>
+                    </div>
+                    <div class="success-message w-form-done" tabindex="-1" role="region"
+                        aria-label="Email Form success">
+                        <div class="text-block-2">Thank you! Your submission has been received!</div>
+                    </div>
+                    <div class="error-message w-form-fail" tabindex="-1" role="region" aria-label="Email Form failure">
+                        <div>Oops! Something went wrong while submitting the form.</div>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </section>
     <script type="text/javascript" src="{{url_for('static-js', path='/socket.js')}}"></script>

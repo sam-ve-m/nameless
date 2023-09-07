@@ -19,6 +19,10 @@ def details(request: Request, player: str):
         return player_templates.TemplateResponse("mestre.html", {"request": request, "player": player})
     return player_templates.TemplateResponse("player.html", {"request": request, "player": player})
 
+@player_route.get("/")
+def guest(request: Request):
+    return player_templates.TemplateResponse("player.html", {"request": request, "player": "Guest"})
+
 
 rota_ficha_do_jogador = WebsocketRouter()
 mudanca_em_jogadores = {}

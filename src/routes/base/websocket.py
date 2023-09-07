@@ -1,17 +1,16 @@
-import asyncio
 from functools import wraps
 from typing import Union
 
 import wsproto.utilities
 from fastapi import WebSocketDisconnect, APIRouter
 
+subscriptions = {}
 
 class WebsocketRouter(APIRouter):
-    subscriptions: dict
+    last_url: str
 
     def new_websocket_route(self, url: str):
-        subscriptions = {}
-        self.subscriptions = subscriptions
+        self.last_url = url
 
         def wrapper_function(function):
             @wraps(function)
@@ -20,7 +19,9 @@ class WebsocketRouter(APIRouter):
                 player = kwargs['player']
                 try:
                     await websocket.accept()
-                    self.subscriptions[player] = websocket
+                    player_subscriptions = subscriptions.get(player, {})
+                    player_subscriptions[self.last_url] = websocket
+                    subscriptions[player] = player_subscriptions
                     await function(*args, **kwargs)
                     if player in subscriptions:
                         del subscriptions[player]
@@ -36,11 +37,12 @@ class WebsocketRouter(APIRouter):
             self.websocket(url)(websocket_function)
         return wrapper_function
 
-    async def get_active_websocket_subscriptions(self) -> list:
-        subscriptions = self.subscriptions
+    @staticmethod
+    async def get_active_websocket_subscriptions() -> list:
         return list(subscriptions.keys())
 
     async def publish_json(self, message: Union[dict, list], websocket_to_ignore=None):
-        for socket in self.subscriptions.values():
+        sockets = (player_subscriptions[self.last_url] for player_subscriptions in  subscriptions.values())
+        for socket in sockets:
             if socket != websocket_to_ignore:
                 await socket.send_json(message)
